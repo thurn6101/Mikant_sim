@@ -1,0 +1,84 @@
+<?xml version="1.0" ?>
+<robot name="Catamaran_Sailboat" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find Catamaran_Sailboat_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find Catamaran_Sailboat_description)/urdf/Catamaran_Sailboat.trans" />
+<xacro:include filename="$(find Catamaran_Sailboat_description)/urdf/Catamaran_Sailboat.gazebo" />
+<link name="base_link">
+  <inertial>
+    <origin xyz="0.47407245303864154 -1.1106656514872044e-05 0.19491227565205158" rpy="0 0 0"/>
+    <mass value="8.639066537441664"/>
+    <inertia ixx="0.772782" iyy="0.486534" izz="0.838847" ixy="6e-06" iyz="1.6e-05" ixz="-0.033043"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Catamaran_Sailboat_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Catamaran_Sailboat_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Rudder_1">
+  <inertial>
+    <origin xyz="-0.0038482216675771105 1.0777882116025673e-07 -0.11240340793042822" rpy="0 0 0"/>
+    <mass value="0.052387114257926276"/>
+    <inertia ixx="0.000255" iyy="0.000259" izz="5e-06" ixy="-0.0" iyz="0.0" ixz="-1.1e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.03295 -0.0 -0.1887" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Catamaran_Sailboat_description)/meshes/Rudder_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.03295 -0.0 -0.1887" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Catamaran_Sailboat_description)/meshes/Rudder_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Wingsail_1">
+  <inertial>
+    <origin xyz="-0.04957452421550207 3.686670561680847e-07 1.1504450686313432" rpy="0 0 0"/>
+    <mass value="28.330316670520148"/>
+    <inertia ixx="7.860575" iyy="7.993693" izz="0.142396" ixy="0.0" iyz="-0.0" ixz="0.013419"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.500001 1e-06 -0.247" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Catamaran_Sailboat_description)/meshes/Wingsail_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.500001 1e-06 -0.247" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Catamaran_Sailboat_description)/meshes/Wingsail_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="Rev1" type="continuous">
+  <origin xyz="0.03295 0.0 0.1887" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="Rudder_1"/>
+  <axis xyz="0.0 0.0 -1.0"/>
+</joint>
+
+<joint name="Rev2" type="continuous">
+  <origin xyz="0.500001 -1e-06 0.247" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="Wingsail_1"/>
+  <axis xyz="-0.0 -0.0 -1.0"/>
+</joint>
+
+</robot>
