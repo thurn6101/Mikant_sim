@@ -15,6 +15,9 @@ namespace buoyancy_force_plugin
   {
     // Store the pointer to the model
     this->model = _model;
+    this->volume = 0;
+    this->fluidDensity = 997;
+    this->fluidLevel = 0;
     
     this->world = this->model->GetWorld();
     this->linkName = _sdf->GetElement("link_name")->Get<std::string>();
@@ -23,7 +26,6 @@ namespace buoyancy_force_plugin
     this->volume = _sdf->Get<double>("volume");
     this->fluidDensity = _sdf->Get<double>("fluid_density");
     this->fluidLevel = _sdf->Get<double>("fluid_level");
-    this->lastSimTime =  this->world->SimTime().Double();
     /*
     if(_sdf->HasElement("link_name"))
     {
@@ -45,6 +47,7 @@ namespace buoyancy_force_plugin
     //physics::LinkPtr link = model->GetLink("base_link");
     //link->SetForce(ignition::math::Vector3d(1000, 0, 0));
     
+    this->lastSimTime =  this->world->SimTime().Double();
     
   }
     
